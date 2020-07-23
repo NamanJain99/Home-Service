@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style>
+  @media (max-width: 767px)
+  {
+    .heading
+    {
+      font-size:20px;
+    }
+  }
+  </style>
+</head>
+<body class="bg-light">
+  <%- include('partials/site_header') %>
+  <section id="main" style="margin-left:50px">
+    <div class="container mt-5">
+      <div class="card mx-auto">
+        <div class="card-body">
+          <div class="row justify-content-center" style="background-color:#ffff">
+            <h1 class="heading">Home-Cleaning Services</h1>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="clea.jpg" class="border w-100 rounded shadow">
+                </div>
+                <div class="col-md-6">
+                  <h1 class="heading">Visit Charge : ₹ 149*</h1>
+                  <p><small><b>Go Cashless:</b><br>Pay Online after your service PayTm and other.</small></p>
+                  <p><small><b>Professionals</b><br>Inhouse Verified and Trained Professionals.</small></p>
+                  <p><small><b>Service Guarantee</b><br>Service Guarantee Upto 365 Days of Service.</small></p>
+                  <input type="button" id="bookMyService" onclick="window.location.assign('/bookingform')" value="BOOK" class="btn btn-info w-75">
+                  <ul>
+                    <li><small>₹ Cash after Service Available. <i class="fa fa-check text-success"></i></small></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5">
+            <p>Our Ancestors said that, ‘Cleaning to your surrounding keeps you Healthy-wealthy and Prosperous.</p>
+            <p>The above quotation is damn true and also catalyse by Doctors and Scientist too.</p>
+            <p>You love to see your surrounding neat and clean but it is difficult to maintain so.</p>
+          </div>
+          <h3 class="mt-2"><b>Cases When cleaning is necessary? <i class="fa fa-arrow-right"></i></b></h3>
+          <ul type="none">
+            <li><small>You have tight time schedule from wake up to good night sleep due to which its impossible to keep the thing as its right place.</small></li>
+            <li><small>You have recently arranged your loving daughter marriage and after farewell you noticed there are number of stains and spongy substances laying everywhere in your venue. Those spongy and creepy crusts may lead to breeding of harmful bacteria. So think what will be happen? Scary one Naa!!</small></li>
+            <li><small>You came back to your home after long tiring ride and you found your home is full of dust polythene dry leaves etc cause of last hurricane. Who feel disgust and thinks what to do now?</small></li>
+            <li><small>Your family doctor recently warned to aware from dust and dirt but getting failed to achieve your goal for keeping your surrounding clean..Again problem?</small></li>
+            <li><small>Drainage system reject your request to flow your wastage properly or may be start overflowing, it causes breeding of mosquitoes which resulting dangerous disease.</small></li>
+            <li><small>All above problems are only snapshot of whole story, there are much worst condition will be happen to you by avoiding cleaning.</small></li>
+            <li><small>You may also need a dishwasher when you take a shift from town to city.</small></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include('partials/footer') %>
+</body>

@@ -1,0 +1,111 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+  .wid
+  {
+    margin-top:70;
+  }
+  .allSides
+  {
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -o-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  }
+  .back {
+    background-color: #c2d6d6;
+  }
+  </style>
+</head>
+<body>
+  <%- include('partials/site_header') %>
+  <center>
+    <div id="main" class="wid container">
+      <h1>Bookings Completed</h1><br>
+      <ul class="list-group" id="completed"></ul>
+    </div>
+  </center>
+  <%- include('partials/footer') %>
+</body>
+<script>
+var ul3=document.getElementById('completed');
+var data2= new XMLHttpRequest();
+data2.open("GET", "/closedBookings");
+data2.onload=function()
+{
+  var info=(JSON.parse(data2.responseText));
+  info.forEach(element=>
+  {
+    var li=document.createElement('li');
+    li.className="list-group-item list-group-item-action allsides";
+
+    var p1=document.createElement('pre');
+    p1.setAttribute("class","lead back");
+    p1.setAttribute("style","margin-left: 40px;")
+    p1.innerHTML="Booking done by - "+element.takenBy;
+    li.appendChild(p1);
+
+    var but=document.createElement('button');
+    but.type= "button";
+    but.setAttribute("class", "btn btn-primary");
+    but.setAttribute("style","float: right;")
+    var z=makeAJAXCall(element._id,but)
+    but.setAttribute("id", element._id);
+    but.setAttribute('onclick', 'review("'+element._id+'")');
+    li.appendChild(but);
+
+    var p=document.createElement('pre');
+    p.setAttribute("class","lead");
+    p.setAttribute("align","left");
+    p.setAttribute("background-color","#d1e0e0");
+    p.innerHTML="    Location - "+element.location+"<br>    Category - "+element.category+"<br>    Date - "+element.date+"<br>    Time - "+element.time+"<br>    Services:-";
+    li.appendChild(p);
+    var ull=document.createElement('ul');
+    element.order.forEach(ele=>{
+      var lii=document.createElement("li");
+      lii.className="list-group-item list-group-item-action allsides";
+      lii.innerHTML="Service  - "+ele.service+"    Sub service - "+ele.subService+"    Quantity - "+ele.quantity;
+      ull.appendChild(lii);
+      var br=document.createElement('br');
+      ull.appendChild(br);
+    })
+    li.appendChild(ull);
+    ul3.appendChild(li);
+
+    var br=document.createElement('br');
+    ul3.appendChild(br);
+    ul3.appendChild(br);
+    ul3.appendChild(br);
+  });
+};
+data2.send();
+
+function review(itemid)
+{
+  window.open("http://localhost:3000/feedback?myvar=" + encodeURI(itemid),"_self");
+}
+
+function makeAJAXCall(e,but)
+{
+  var https=new XMLHttpRequest();
+  https.addEventListener('load',function(){
+    if(https.response==="rev")
+    {
+      but.innerHTML="Edit Review";
+    }
+    else
+      but.innerHTML="Write A Service Review";
+  });
+  https.open("POST","/checkar",false);
+  https.setRequestHeader('Content-Type','application/json');
+  https.send(JSON.stringify({'bookid':e}));
+}
+</script>
+</html>

@@ -1,0 +1,77 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+.text-muted
+{
+  display:none;
+}
+</style>
+<body>
+  <div id="main" class="container">
+    <div class="row mt-5">
+      <div class="col-md-12">
+          <legend>RESET PASSWORD</legend>
+          <div class="form-group">
+            <small id="resethelp" class="form-text text-muted"></small>
+          </div>
+          <div class="form-group">
+            <label for="password">NEW PASSWORD</label>
+            <input type="password" name="password" value="" autofocus class="form-control" id="password1">
+            <small id="password1help" class="form-text text-muted"></small>
+          </div>
+          <div class="form-group">
+            <label for="confirm">Confirm PASSWORD</label>
+            <input type="password" name="confirm" value="" autofocus class="form-control" id="password2">
+            <small id="password2help" class="form-text text-muted"></small>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" onclick="checkvalidations()">Update password</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+function checkvalidations()
+{
+  var password1=document.getElementById("password1");
+  var password2=document.getElementById("password2");
+  var password1help=document.getElementById("password1help");
+  var password2help=document.getElementById("password2help");
+  var resethelp=document.getElementById("resethelp");
+  if(password1.value=="")
+  {
+    password1help.innerHTML="FIELD IS EMPTY";
+    password1help.style.display="inline-block";
+  }
+  else if(password2.value=="")
+  {
+    password2help.innerHTML="FIELD IS EMPTY";
+    password2help.style.display="inline-block";
+  }
+  else if(password1.value===password2.value)
+  {
+    var updatepass=new XMLHttpRequest();
+    updatepass.addEventListener('load',function(req,res)
+    {
+      window.location.assign('/');
+    })
+    updatepass.open('POST','/resetpas/<%- token %>/<%- role %>');
+    updatepass.setRequestHeader('Content-Type','application/json');
+    updatepass.send(JSON.stringify({'password':password1.value}));
+  }
+  else
+  {
+    resethelp.innerHTML="password does not match";
+    resethelp.style.dsiplay="inline-block";
+  }
+}
+</script>
+</html>

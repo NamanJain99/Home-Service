@@ -1,0 +1,224 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js" defer></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<%- include ('partials/adminheader') %>
+<div id="main">
+    <div id="page-content-wrapper" style="padding:0;margin-top:60px;margin-left:50px"> <!--Margin Top is new-->
+        <div class="container-fluid page-content-div" style="padding:0">
+            <div class="row">
+                <div class="col-lg-12 scoll-possible" style="padding:0">
+                    <div style="margin-left:20px;margin-right:20px">
+
+                        <div class="modal fade" id="popUp" role="dialog" style="z-index:9999">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h4 class="modal-title" id="mailheader" style="text-align:left">Send Reminder Mail</h4>
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <!------------------------------------------------------------------------------------>
+                                        <div class="form-horizontal"> <!-- form -->
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2" for="email">To:</label>
+                                                <div class="col-sm-10">
+                                                <input type="email" name="username" class="form-control" id="emailPop" readonly="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2">Subject:</label>
+                                                <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Title">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12"><!--Body-->
+                                                <div id="editor" style="width:100%;height:200px;border-radius:5px;border:1;"  ></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                <button class="btn btn-success" id="mailbutton" style="float:right" data-dismiss="modal">Send</button>
+                                                </div>
+                                            </div>
+                                        </div> <!-- form -->
+                                    <!---------------------------------------------------------------------------------->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="delete" role="dialog" style="z-index:9999">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                    <!------------------------------------------------------------------------------------>
+                                        <div class="form-horizontal"> <!-- form -->
+                                            <div class="jconfirm-title-c">
+                                                <span class="jconfirm-icon-c"></span>
+                                                <span class="jconfirm-title" id="what"></span>
+                                            </div>
+                                            <div class="jconfirm-content" id="jconfirm-box86121">
+                                                <div id="sure"></div>
+                                                </div>
+                                            <div class="jconfirm-buttons">
+                                            <button type="button" class="btn btn-success" id="yes" data-dismiss="modal">Yes</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                            </div>
+                                        </div> <!-- form -->
+                                    <!---------------------------------------------------------------------------------->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <center><p id="msgalert"></p></center>
+
+                        <div class="form-control allSides" id="roleFilterTitle" style="float: left;width:120px;font-weight:bold;">
+                            User List
+                        </div>
+
+                        <button onclick="refresh()" class="btn btn-default" style="float: right;background-color: #2D312C;color: #fff">
+                            <span class="glyphicon glyphicon-refresh"></span> Refresh
+                        </button>
+
+                        <br>
+                        <br>
+                        <br>
+
+                        <div class="container-fluid">
+                            <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablebody">
+                                </tbody>
+                            </table>
+                          </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    var editor = new Quill('#editor', {
+        theme: 'snow'
+    });
+
+	function del(tr)
+	{
+        console.log(tr);
+        var what=document.getElementById("what");
+        var sure=document.getElementById("sure");
+        var btn=document.getElementById("yes");
+        var flag;
+        if(tr.isActive)
+        {
+            what.innerHTML="Deactivate User ?";
+            sure.innerHTML="Are you really want to deactivate "+tr.email;
+            flag=false;
+        }
+        else
+        {
+            what.innerHTML="Activate User ?";
+            sure.innerHTML="Are you really want to activate "+tr.email;
+            flag=true;
+        }
+        btn.onclick=function()
+        {
+            var req=new XMLHttpRequest();
+            req.open("POST","/yes");
+            req.setRequestHeader("Content-Type", "application/json");
+            req.onload=function()
+            {
+                refresh();
+            }
+            req.send(JSON.stringify({'id':tr._id,'flag':flag}));
+        }
+	}
+
+	function send(tr)
+	{
+		var btn=document.getElementById("mailbutton");
+		var id=document.getElementById("emailPop");
+		var sub=document.getElementById("subject");
+		id.value=tr.email;
+		btn.onclick=function()
+		{
+			var mail=new XMLHttpRequest();
+			mail.open("POST","/send");
+			mail.setRequestHeader("Content-Type", "application/json");
+			mail.send(JSON.stringify({'email':tr.email,'sub':sub.value,'write':editor.container.firstChild.innerHTML}));
+		}
+    }
+
+    function rev(tr)
+	{
+		window.open("http://localhost:3000/feedbackShow?myvar=" + encodeURI(tr._id),"_self");
+	}
+
+    $(document).ready(function() {
+        $('#datatable').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "autoWidth": false,
+            "paging":true,
+            "dataSrc":"",
+            "ajax": {
+                "url": "/userlist",
+                "data": function(data){},
+                "type": "POST"
+            },
+            "columns": [
+                { "data": "username" },
+                { "data": "email" },
+                { "data": "phone" },
+                { "data": "isActive"}
+            ],
+            columnDefs: [
+                {
+                    orderable:false,
+                    targets:-1, // Start with the last
+                    render: function ( data, type, row, meta ) {
+                        if(row.isActive)
+                            data = '<button onclick=\'send('+JSON.stringify(row)+')\' class="btn btn-primary btn-sm emailbtn actionbtns" style="background:#000 type="button" data-toggle="modal" data-target="#popUp""><span class="fa fa-envelope" style="color:#fff"></span></button><button onclick=\'rev('+JSON.stringify(row)+')\' class="btn btn-primary btn-sm editbtn actionbtns" type="button"><span class="fa fa-list"></span></button><button id="delbtn" class="btn btn-success btn-sm activebtn actionbtns" onclick=\'del('+JSON.stringify(row)+')\' data-toggle="modal" data-target="#delete"><span id="delspan" class="fa fa-check-circle"></span></button>';
+                        else
+                            data = '<button onclick=\'send('+JSON.stringify(row)+')\' class="btn btn-primary btn-sm emailbtn actionbtns" style="background:#000 type="button" data-toggle="modal" data-target="#popUp""><span class="fa fa-envelope" style="color:#fff"></span></button><button onclick=\'rev('+JSON.stringify(row)+')\' class="btn btn-primary btn-sm editbtn actionbtns" type="button"><span class="fa fa-list"></span></button><button id="delbtn" class="btn btn-warning btn-sm activebtn actionbtns" onclick=\'del('+JSON.stringify(row)+')\' data-toggle="modal" data-target="#delete"><span id="delspan" class="fa fa-times-circle"></span></button>';
+                        return data;
+                    }
+                }
+            ]
+        });
+    });
+
+	function refresh()
+	{
+		$('#datatable').DataTable().ajax.reload(null, false);
+    }
+
+
+</script>
+
+</html>

@@ -1,0 +1,68 @@
+.nav-tabs
+{
+    border-bottom: 1px solid black;
+}
+.modal-header
+{
+  border-bottom: 0px;
+}
+.nav
+{
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+.nav
+{
+    margin-top: 0;
+}
+*
+{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.nav
+{
+    display: block;
+    list-style-type: disc;
+    margin-inline-end: 10px;
+    padding-inline-start: 10px;
+}
+.nav-tabs>.tt
+{
+    float: left;
+    margin-bottom: -1px;
+}
+
+.nav>.tt
+{
+    position: relative;
+    display: block;
+}
+.tt
+{
+    display: list-item;
+    text-align: -webkit-match-parent;
+    cursor: pointer;
+}
+.nav-tabs>.tt.active>a, .nav-tabs>.tt.active>a:focus, .nav-tabs>.tt.active>a:hover
+{
+    color: #555;
+    background-color: #fff;
+    border: 1px solid black;
+    border-bottom-color: transparent;
+}
+.nav-tabs>.tt>a
+{
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+}
+.nav>.tt>a
+{
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}

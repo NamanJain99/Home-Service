@@ -1,0 +1,511 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/html" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style>
+  #bookingForm
+  {
+    background-color: #ffffff;
+    margin: 100px auto;
+    font-family: Raleway;
+    padding: 40px;
+    width: 70%;
+    min-width: 300px;
+  }
+  h1
+  {
+    text-align: center;
+  }
+  input
+  {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa;
+  }
+  input.invalid
+  {
+    background-color: #ffdddd;
+  }
+  .tab
+  {
+    display: none;
+  }
+  button
+  {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer;
+  }
+  button:hover
+  {
+    opacity: 0.8;
+  }
+  #prevBtn
+  {
+    background-color: #bbbbbb;
+  }
+  .step
+  {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+  }
+  .step.active
+  {
+    opacity: 1;
+  }
+  /* Mark the steps that are finished and valid: */
+  .step.finish
+  {
+    background-color: #4CAF50;
+  }
+  @media (max-width: 767px)
+  {
+    .heading
+    {
+      font-size:20px;
+    }
+  }
+  .cc:hover
+  {
+    cursor:pointer;
+  }
+  </style>
+</head>
+
+<body class="bg-light">
+ <%- include('partials/site_header') %>
+ <div class="modal" id="coupanmodal">
+   <div class="modal-dialog">
+     <div class="modal-content">
+       <!-- Modal Header -->
+       <div class="modal-header">
+         <h4 class="modal-title">PROMO CODES</h4>
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+       </div>
+       <!-- Modal body -->
+       <div class="modal-body" id="coupanbody">
+         <ul class="" id="coupanlist"></ul>
+       </div>
+       <!-- Modal footer -->
+       <div class="modal-footer">
+         <button type="button" class="btn btn-danger" data-dismiss="modal" id="cancel">Cancel</button>
+       </div>
+     </div>
+    </div>
+ </div>
+     
+<div class="container" id="main">
+<form id="bookingForm" action="/booking" method="POST">
+  <input type='hidden' id= 'hiddenField' name='id' value='' />
+  <div class="tab"><h1 class="heading">Service Detail</h1>
+    <center>
+    <p><input id="category" name="category" class="form-control form-control-lg" readonly value=<%- which %>></p>
+    <select required class="form-control form-control-lg" name="Service" id="service">
+      <option selected="selected" value="0">Please Select Service</option>
+      <option value="Service">Service</option>
+      <option value="Repair">Repair</option>
+      <option value="Installation">Installation</option>
+      <option value="Removal">Removal</option>
+    </select>
+    <br>
+    <select required class="form-control form-control-lg" name="Subservice" id="subservice">
+      <option selected="selected" value="0">Please Select Sub Service</option>
+      <option value="Ceiling fan">Ceiling fan</option>
+      <option value="Wall fan">Wall fan</option>
+      <option value="Exhaust fan">Exhaust fan</option>
+      <option value="Desert cooler">Desert cooler</option>
+      <option value="Electric fuse box">Electric fuse box</option>
+      <option value="MCB">MCB</option>
+    </select>
+    <br>
+    <select required class="form-control form-control-lg" name="Quantity" id="quantity">
+      <option value="0">Please Select Quantity</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+    <br>
+    <p align="right"><button type="button" onclick="addItem()">Add</button></p>
+    <div>
+      <ul class="list-group" id="list">
+      </ul>
+    </div>
+    <p align="left" style="margin-top: 30px;"><button type="button" onclick="addToCart()">Add to cart</button></p>
+  </center>
+  </div>
+
+  <div class="tab"><h1 class="heading">Pricing Schedule</h1>
+    <div style="margin:0 auto; max-width:870px">
+      <p>• ₹ 199 will be charged for 1ST hour.</p>
+      <p>• ₹ 99 will be charged for next 30 minutes following to 1st hour.</p>
+      <p>• ₹ 99 will be charged in case of Inspection only.</p>
+      <p>• Material procurement time will be included in service time.</p>
+      <p>• Required Material cost is excluded from above cost.</p>
+    </div>
+  </div>
+  <div class="tab"><h1 class="heading">Location, Date & Time </h1>
+    <center>
+      <select required class="form-control form-control-lg" name="Location">
+        <option selected="selected" value="0">Please Select Location</option>
+        <option value="Allahabad City">Allahabad City</option>
+        <option value="Amritsar City">Amritsar City</option>
+        <option value="Bhopal City">Bhopal City</option>
+        <option value="Chandigarh City">Chandigarh City</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Faridabad">Faridabad</option>
+        <option value="Ghaziabad">Ghaziabad</option>
+        <option value="Greater Noida">Greater Noida</option>
+        <option value="Gurgaon">Gurgaon</option>
+        <option value="Indore City">Indore City</option>
+        <option value="Jaipur City">Jaipur City</option>
+        <option value="Kanpur City">Kanpur City</option>
+        <option value="Kota City">Kota City</option>
+        <option value="Lucknow City">Lucknow City</option>
+        <option value="Ludhiana City">Ludhiana City</option>
+        <option value="Mumbai City">Mumbai City</option>
+        <option value="Nagpur City">Nagpur City</option>
+      </select>
+      <br>
+      <input id="datepicker" width="60%" name="Date" placeholder="please enter date" type="date">
+      <br>
+      <br>
+      <select required class="form-control form-control-lg" name="Time">
+        <option selected="selected" value="0">Please Select Time</option>
+        <option value="03:00 PM - 05:00 PM">03:00 PM - 05:00 PM</option>
+        <option value="05:00 PM - 07:00 PM">05:00 PM - 07:00 PM</option>
+        <option value="07:00 PM - 09:00 PM">07:00 PM - 09:00 PM</option>
+      </select>
+    </center>
+  </div>
+  <div class="tab"><h1 class="heading">Personal Detail</h1>
+    <center>
+      <p><input placeholder="Name" name="name"></p>
+      <p><input  placeholder="Mobile Number" name="mobile"></p>
+      <p><input  placeholder="Address"   name="address"></p>
+      <p><input  placeholder="pin code"   name="pin"></p>
+      <p style="display:flex"><input type="text" id="promo" name="promo" placeholder="Enter promocode here..."><a class="btn btn-success"onclick="validatecoupan()">APPLY</a></p>
+      <small class="text-muted" id="msg"></small>
+    </center>
+    <a class="text-info cc" data-target="#coupanmodal" data-toggle="modal" onclick="hascoupan()">Exclusive Promocodes for You</a>
+  </div>
+  <div style="overflow:auto;">
+    <div style="float:right;">
+      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+    </div>
+  </div>
+  <!-- Circles which indicates the steps of the form: -->
+  <div style="text-align:center;margin-top:40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+   </div>
+   </form>
+ </div>
+ <%- include('partials/footer') %>
+</body>
+
+<script>
+function validatecoupan()
+{
+  var msg=document.getElementById("msg");
+  var pr=document.getElementById("promo");
+  msg.innerHTML="";
+  if(pr.value==="")
+  {
+    msg.innerHTML="FIELD IS EMPTY";
+  }
+  else
+  {
+    var val=new XMLHttpRequest();
+    val.addEventListener('load',function(){
+      msg.innerHTML=val.response
+    })
+    val.open('POST','/valcoupan');
+    val.setRequestHeader('Content-Type','application/json');
+    val.send(JSON.stringify({'coupan':pr.value}))
+  }
+}
+function hascoupan()
+{
+  var div=document.getElementById("coupanbody");
+  div.innerHTML="";
+  var cp=new XMLHttpRequest();
+  cp.addEventListener('load',function(){
+    var result=JSON.parse(cp.response);
+    if(result.length==0)
+    {
+      var legend=document.createElement("legend");
+      legend.className="text-muted";
+      legend.innerHTML="NO COUPAN AVAILABLE!";
+      div.appendChild(legend);
+    }
+    else
+    {
+      var list=document.createElement("ul");
+      list.className="list-group list-group-flush";
+      result.forEach(element=>
+        {
+          var candi=element.split('#');
+          var li=document.createElement("li");
+          li.className="list-group-item";
+          li.innerHTML=candi[0]+'<button style="float:right" onclick="copytext(this)">COPY CODE</button><br><small>'+candi[1]+'</small>';
+          list.appendChild(li);
+        });
+      div.appendChild(list);
+    }
+  });
+  cp.open('GET','/promo');
+  cp.send();
+}
+function copytext(a)
+{
+  var text=a.parentNode.innerHTML.split('<')[0];
+  var elem = document.createElement("textarea");
+  document.body.appendChild(elem);
+  elem.value = text;
+  elem.select();
+  document.execCommand("copy");
+  document.body.removeChild(elem);
+  document.getElementById("cancel").click();
+}
+var arr=[];
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+var id=urlParams.get('myvar');
+console.log(id);
+if(urlParams.has('myvar'))
+{
+  var service=new XMLHttpRequest();
+  service.addEventListener('load',function()
+  {
+    var info=(JSON.parse(service.responseText));
+    arr=info[0].order;
+    document.getElementById("category").value=info[0].category;
+  });
+  service.open("POST",'/checkout');
+  service.setRequestHeader('Content-Type','application/json');
+  service.send(JSON.stringify({'id':id}));
+}
+
+var datepicker=document.getElementById("datepicker");
+datepicker.onfocus=function()
+{
+  var start_date=new Date();
+  var end_date=new Date()
+  end_date.setDate(end_date.getDate()+10);
+  datepicker.setAttribute("min",start_date.toJSON().split('T')[0]);
+  datepicker.setAttribute("max",end_date.toJSON().split('T')[0]);
+}
+var currentTab;
+if(urlParams.has('myvar'))
+{
+  currentTab = 1; // Current tab is set to be the first tab (0)
+}
+else
+{
+  currentTab = 0;
+}
+showTab(currentTab); // Display the current tab
+function showTab(n)
+{
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  //... and fix the Previous/Next buttons:
+  if (n == 0 || (urlParams.has('myvar') && n==1))
+  {
+    document.getElementById("prevBtn").style.display = "none";
+  }
+  else
+  {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1))
+  {
+      document.getElementById("nextBtn").innerHTML = "Submit";
+  }
+  else
+  {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  //... and run a function that will display the correct step indicator:
+  fixStepIndicator(n)
+}
+function nextPrev(n)
+{
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form...
+  if (currentTab >= x.length)
+  {
+    // ... the form gets submitted:
+    var service=document.getElementById("service").value;
+    var subService=document.getElementById("subservice").value;
+    var quantity=document.getElementById("quantity").value;
+    if(arr.length==0)
+    {
+      arr.push({
+        service,
+        subService,
+        quantity
+      })
+    }
+    document.getElementById('hiddenField').value = JSON.stringify(arr);
+
+    var rem=new XMLHttpRequest();
+    rem.open("POST",'/deleteCartItems');
+    rem.setRequestHeader('Content-Type','application/json');
+    rem.send(JSON.stringify({'id':id}));
+
+    document.getElementById("bookingForm").submit();
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+function validateForm()
+{
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  z = x[currentTab].getElementsByTagName("select");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++)
+  {
+    // If a field is empty...
+    if (y[i].value == "" && y[i].id!="promo")
+    {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  for (i = 0; i < z.length; i++)
+  {
+    // If a field is empty...
+    if (z[i].value == 0)
+    {
+      // add an "invalid" class to the field:
+      z[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid)
+  {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+function fixStepIndicator(n)
+{
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++)
+  {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+function addToCart(){
+  var category=document.getElementById("category").value;
+  var service=document.getElementById("service").value;
+  var subService=document.getElementById("subservice").value;
+  var quantity=document.getElementById("quantity").value;
+  if(service==="0" || subService==="0" || quantity==="0")
+  {
+    alert("please select all values");
+    return;
+  }
+  if(arr.length==0)
+  {
+    arr.push({
+      service,
+      subService,
+      quantity
+    })
+  }
+  var cart=new XMLHttpRequest();
+  cart.addEventListener('load',function(){
+    window.open("http://localhost:3000/home","_self");
+  });
+  cart.open("POST","/addToCart");
+  cart.setRequestHeader('Content-Type','application/json');
+  cart.send(JSON.stringify({'category':category,'id':JSON.stringify(arr)}));
+}
+function addItem()
+{
+  var service=document.getElementById("service").value;
+  var subService=document.getElementById("subservice").value;
+  var quantity=document.getElementById("quantity").value;
+  if(service==="0" || subService==="0" || quantity==="0")
+  {
+    alert("please select all values");
+    return;
+  }
+  var obj={
+    service,
+    subService,
+    quantity
+  };
+  var flag=0;
+  arr.forEach(element => {
+      if(element.service==service && element.subService==subService)
+      {
+        var temp=parseInt(element.quantity)+parseInt(quantity);
+        element.quantity=temp.toString();
+        flag=1;
+      }
+  });
+  if(flag==0)
+    arr.push(obj);
+  var ul=document.getElementById('list');
+  ul.innerHTML="";
+  arr.forEach(element => {
+      var li=document.createElement('li');
+      li.className="list-group-item list-group-item-action";
+      var p=document.createElement('p');
+      p.innerHTML="Service  - "+element.service+"    Sub service - "+element.subService+"    Quantity - "+element.quantity;
+      li.appendChild(p);
+      ul.appendChild(li);
+  });
+}
+</script>
+</html>

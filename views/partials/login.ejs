@@ -1,0 +1,189 @@
+<div class="modal" id="loginModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">LOGIN</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <ul class="nav nav-tabs">
+        <li class="active tt w-50 text-center" id="userlobutton"><a data-toggle="tab" onClick="togletouserl()">AS USER</a></li>
+        <li class="tt w-50 text-center" id="prolobutton"><a data-toggle="tab" onClick="togletoprol()">AS PRO</a></li>
+      </ul>
+      <!-- Modal body -->
+      <div class="modal-body" id="userloginform">
+        <div id="m">
+          <form>
+            <div class="form-group">
+              <small id="loginhelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="username" class="form-control" id="usernamel" aria-describedby="emailHelp" placeholder="Enter Username" value="">
+              <small id="usernamelhelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="passwordl" placeholder="Password" value="">
+              <small id="passwordlhelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+              <a href="" class="btn"data-toggle="modal" data-target="#ForgotModal" data-dismiss="modal">Forgot Password</a>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-body" id="prologinform">
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="checkvalidationlogin()">Submit</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="ForgotModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Forgot Password</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="username">Email ID</label>
+          <input type="username" class="form-control" id="forgotemail" aria-describedby="emailHelp" placeholder="Enter Email" value="">
+          <small id="forgotemailhelp" class="form-text text-muted"></small>
+          <div class="loading" id="loading" style="display:none">
+            <div class='uil-ring-css' style='transform:scale(0.79);'></div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="forgot()">Submit</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  var role="user"
+  function togletouserl()
+  {
+    var userloginform=document.getElementById("userloginform");
+    var prologinform=document.getElementById("prologinform");
+    var userlobutton=document.getElementById("userlobutton");
+    var prolobutton=document.getElementById("prolobutton");
+    var m=document.getElementById('m');
+    role="user";
+    if(prolobutton.classList.contains("active"))
+    {
+      userloginform.style.display="block";
+      userlobutton.classList.add("active");
+      prolobutton.classList.remove("active");
+      prologinform.style.display="none";
+      m.parentNode.removeChild(m);
+      userloginform.appendChild(m);
+    }
+  }
+  function togletoprol()
+  {
+    var userloginform=document.getElementById("userloginform");
+    var prologinform=document.getElementById("prologinform");
+    var userlobutton=document.getElementById("userlobutton");
+    var prolobutton=document.getElementById("prolobutton");
+    var m=document.getElementById('m');
+    role="professional"
+    if(userlobutton.classList.contains("active"))
+    {
+      prologinform.style.display="block";
+      prolobutton.classList.add("active");
+      userlobutton.classList.remove("active");
+      userloginform.style.display="none";
+      m.parentNode.removeChild(m);
+      prologinform.appendChild(m);
+    }
+  }
+  function checkvalidationlogin()
+  {
+    var loginhelp=document.getElementById("loginhelp");
+    var username=document.getElementById("usernamel");
+    var password=document.getElementById("passwordl");
+    var usernamehelp=document.getElementById("usernamelhelp");
+    var passwordhelp=document.getElementById("passwordlhelp");
+    loginhelp.style.display="none";
+    usernamehelp.style.display="none";
+    passwordhelp.style.display="none";
+    if(username.value=='')
+    {
+      usernamehelp.innerHTML="FIELD IS EMPTY";
+      usernamehelp.style.display="inline-block";
+    }
+    else if(password.value=='')
+    {
+      passwordhelp.innerHTML="FIELD IS EMPTY";
+      passwordhelp.style.display="inline-block";
+    }
+    else
+    {
+      var login=new XMLHttpRequest();
+      login.addEventListener('load',function(){
+        if(login.response==="login" && role==="user")
+        {
+          window.location.assign('/Home');
+        }
+        else if(login.response==="login" && role==="professional")
+        {
+          window.location.assign('/proHome');
+        }
+        else if(login.response==="try again")
+        {
+          loginhelp.innerHTML="id password does not match";
+          loginhelp.style.display="inline-block";
+        }
+        else if(login.response==="dea")
+        {
+          alert("sorry you are deactivated by the admin contact admin");
+        }
+      });
+      login.open("POST","/login");
+      login.setRequestHeader('Content-Type','application/json');
+      login.send(JSON.stringify({'username':username.value,'password':password.value,'role':role}));
+    }
+  }
+  function forgot()
+  {
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var forgotemail=document.getElementById("forgotemail");
+    var forgotemailhelp=document.getElementById("forgotemailhelp");
+    forgotemailhelp.style.display="none"
+    if(forgotemail.value=='')
+    {
+      forgotemailhelp.innerHTML="FIELD IS EMPTY";
+      forgotemailhelp.style.display="inline-block";
+    }
+    else if(!forgotemail.value.match(mailformat))
+    {
+      forgotemailhelp.innerHTML="INVALID EMAIL";
+      forgotemailhelp.style.display="inline-block"
+    }
+    else
+    {
+      document.getElementById("loading").style.display="block";
+      var forgot=new XMLHttpRequest();
+      forgot.addEventListener('load',function()
+      {
+        document.getElementById("loading").style.display="none";
+        forgotemailhelp.innerHTML=forgot.response;
+        forgotemailhelp.style.display="inline-block"
+      });
+      forgot.open("POST","/forgot");
+      forgot.setRequestHeader('Content-Type','application/json');
+      forgot.send(JSON.stringify({'email':forgotemail.value,'role':role}));
+    }
+  }
+</script>

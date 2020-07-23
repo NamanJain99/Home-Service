@@ -1,0 +1,30 @@
+<style>
+  .i
+  {
+    height:50px;
+    width:50px;
+  }
+</style>
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <img class="navbar-brand i" src="logo_size.jpg">
+    <label class="navbar-brand">AhomeserviceZ</label>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link btn" data-toggle="modal" data-target="#signupModal" onclick="togletouser()">Signup</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link btn" data-toggle="modal" data-target="#loginModal">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link btn" data-toggle="modal" data-target="#AdminModal">Admin</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="container-fluid" style="margin-top:65px">
+    <%- include ('signup') %>
+    <%- include ('login') %>
+    <%- include ('Adminlogin') %>
+  </div>
+  </body>
+</html>

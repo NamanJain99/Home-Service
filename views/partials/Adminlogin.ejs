@@ -1,0 +1,78 @@
+<div class="modal" id="AdminModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">ADMIN LOGIN</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div id="m">
+          <form>
+            <div class="form-group">
+              <small id="adloginhelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="username" class="form-control" id="adusernamel" aria-describedby="emailHelp" placeholder="Enter Username" value="">
+              <small id="adusernamelhelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="adpasswordl" placeholder="Password" value="">
+              <small id="adpasswordlhelp" class="form-text text-muted"></small>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="checkadvalidationlogin()">Submit</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function checkadvalidationlogin()
+  {
+    var adloginhelp=document.getElementById("adloginhelp");
+    var adusername=document.getElementById("adusernamel");
+    var adpassword=document.getElementById("adpasswordl");
+    var adusernamehelp=document.getElementById("adusernamelhelp");
+    var adpasswordhelp=document.getElementById("adpasswordlhelp");
+    adloginhelp.style.display="none";
+    adusernamehelp.style.display="none";
+    adpasswordhelp.style.display="none";
+    if(adusername.value=='')
+    {
+      adusernamehelp.innerHTML="FIELD IS EMPTY";
+      adusernamehelp.style.display="inline-block";
+    }
+    else if(adpassword.value=='')
+    {
+      adpasswordhelp.innerHTML="FIELD IS EMPTY";
+      adpasswordhelp.style.display="inline-block";
+    }
+    else
+    {
+      var login=new XMLHttpRequest();
+      login.addEventListener('load',function()
+      {
+        if(login.response=="try again")
+        {
+          adloginhelp.innerHTML="id password does not match";
+          adloginhelp.style.display="inline-block";
+        }
+        else
+        {
+          window.open('http://localhost:3000/userlist','_self');
+        }
+      });
+      login.open("POST","/adlogin");
+      login.setRequestHeader('Content-Type','application/json');
+      login.send(JSON.stringify({'username':adusername.value,'password':adpassword.value}));
+    }
+  }
+</script>

@@ -1,0 +1,252 @@
+<html>
+    <head>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/html" href="path/to/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <style>
+            .rating-header {
+                margin-top: -10px;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <%- include('partials/site_header') %>
+        <div class="container" style="text-align: center">
+        <div style="margin-top: 70px;" class="form-group" id="rating-ability-wrapper">
+            <label class="control-label" for="rating">
+            <div class="container" style="text-align: left">
+                <h2 >Create Review</h2>
+            </div>
+            <ul class="list-group" id="open"></ul>
+            <hr>
+            <h4 >Overall rating</h4>
+            <span class="field-label-info"></span>
+            <input type="hidden" id="selected_rating" name="selected_rating" value="" required="required">
+            </label>
+            <h2 class="bold rating-header">
+            <span class="selected-rating"></span><small></small>
+            </h2>
+            <button type="button" class="btnrating btn btn-default btn-lg r1" data-attr="1" id="rating-star-1">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r1" data-attr="2" id="rating-star-2">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r1" data-attr="3" id="rating-star-3">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r1" data-attr="4" id="rating-star-4">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r1" data-attr="5" id="rating-star-5">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+
+            <hr width="50%">
+            <h4>Rate Features</h4>
+            <span class="field-label-header">Professional Rating</span><br><br>
+            <span class="field-label-info"></span>
+            <input type="hidden" id="selected_rating1" name="selected_rating1" value="" required="required">
+            </label>
+            <button type="button" class="btnrating btn btn-default btn-lg r2" data-attr="6" id="rating-star-6">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r2" data-attr="7" id="rating-star-7">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r2" data-attr="8" id="rating-star-8">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r2" data-attr="9" id="rating-star-9">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r2" data-attr="10" id="rating-star-10">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            
+            <br><br><span class="field-label-header">Time Rating</span><br><br>
+            <span class="field-label-info"></span>
+            <input type="hidden" id="selected_rating2" name="selected_rating2" value="" required="required">
+            </label>
+            <button type="button" class="btnrating btn btn-default btn-lg r3" data-attr="11" id="rating-star-11">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r3" data-attr="12" id="rating-star-12">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r3" data-attr="13" id="rating-star-13">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r3" data-attr="14" id="rating-star-14">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r3" data-attr="15" id="rating-star-15">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+
+            <br><br><span class="field-label-header">Service rating</span><br><br>
+            <span class="field-label-info"></span>
+            <input type="hidden" id="selected_rating3" name="selected_rating3" value="" required="required">
+            </label>
+            <button type="button" class="btnrating btn btn-default btn-lg r4" data-attr="16" id="rating-star-16">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r4" data-attr="17" id="rating-star-17">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r4" data-attr="18" id="rating-star-18">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r4" data-attr="19" id="rating-star-19">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-default btn-lg r4" data-attr="20" id="rating-star-20">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+
+            <hr width="50%">
+            <h4>Add a headline</h4>
+            <input type="text" id="sub" name="subject" size="50"><br><br>
+            
+            <h4 >Write a review</h4>
+            <textarea name="message" rows="5" cols="50" id="desp"></textarea><br>
+            <br>
+            <button type="button" class="btn btn-success" onclick="feed()">Submit</button>
+        </div>
+    </div>
+    </body>
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        var id=urlParams.get('myvar');
+        var ul=document.getElementById('open');
+        var data= new XMLHttpRequest();
+        data.onload=function()
+        {
+            var element=(JSON.parse(data.responseText));
+            var li=document.createElement('li');
+            li.className="list-group-item list-group-item-action";
+            var p=document.createElement('p');
+            p.innerHTML="Location - "+element[0].location+" Category - "+element[0].category+"        Date - "+element[0].date+"        Time - "+element[0].time;
+            li.appendChild(p);
+            var ull=document.createElement('ul');
+            element[0].order.forEach(ele=>{
+                var lii=document.createElement("li");
+                lii.innerHTML="Service  - "+ele.service+"    Sub service - "+ele.subService+"    Quantity - "+ele.quantity;
+                ull.appendChild(lii);
+            })
+            li.appendChild(ull);
+            ul.appendChild(li);
+        };
+        data.open("POST", "/review");
+        data.setRequestHeader('Content-Type','application/json');
+        data.send(JSON.stringify({'id':id}));
+
+        var selected_value=0;
+        var selected_value1=0;
+        var selected_value2=0; 
+        var selected_value3=0; 
+
+        jQuery(document).ready(function($){
+	    
+            $(".r1").on('click',(function(e) {
+            
+                var previous_value = $("#selected_rating").val();
+                
+                selected_value = $(this).attr("data-attr");
+                $("#selected_rating").val(selected_value);
+                
+                for (i = 1; i <= selected_value; ++i) {
+                    $("#rating-star-"+i).toggleClass('btn-warning');
+                    $("#rating-star-"+i).toggleClass('btn-default');
+                }
+                
+                for (ix = 1; ix <= previous_value; ++ix) {
+                    $("#rating-star-"+ix).toggleClass('btn-warning');
+                    $("#rating-star-"+ix).toggleClass('btn-default');
+                }
+            })); 
+        });
+
+        jQuery(document).ready(function($){	    
+            $(".r2").on('click',(function(e) {
+                var previous_value = $("#selected_rating1").val();
+                
+                selected_value1 = $(this).attr("data-attr");
+                $("#selected_rating1").val(selected_value1);
+                
+                for (i = 6; i <= selected_value1; ++i) {
+                    $("#rating-star-"+i).toggleClass('btn-warning');
+                    $("#rating-star-"+i).toggleClass('btn-default');
+                }
+                
+                for (ix = 6; ix <= previous_value; ++ix) {
+                    $("#rating-star-"+ix).toggleClass('btn-warning');
+                    $("#rating-star-"+ix).toggleClass('btn-default');
+                }
+            })); 
+        });
+        
+        jQuery(document).ready(function($){	    
+            $(".r3").on('click',(function(e) {
+                var previous_value = $("#selected_rating2").val();
+                
+                selected_value2 = $(this).attr("data-attr");
+                $("#selected_rating2").val(selected_value2);
+                
+                for (i = 11; i <= selected_value2; ++i) {
+                    $("#rating-star-"+i).toggleClass('btn-warning');
+                    $("#rating-star-"+i).toggleClass('btn-default');
+                }
+                
+                for (ix = 11; ix <= previous_value; ++ix) {
+                    $("#rating-star-"+ix).toggleClass('btn-warning');
+                    $("#rating-star-"+ix).toggleClass('btn-default');
+                }
+            })); 
+        });
+
+        jQuery(document).ready(function($){	    
+            $(".r4").on('click',(function(e) {
+                var previous_value = $("#selected_rating3").val();
+                
+                selected_value3 = $(this).attr("data-attr");
+                $("#selected_rating3").val(selected_value3);
+                
+                for (i = 16; i <= selected_value3; ++i) {
+                    $("#rating-star-"+i).toggleClass('btn-warning');
+                    $("#rating-star-"+i).toggleClass('btn-default');
+                }
+                
+                for (ix = 16; ix <= previous_value; ++ix) {
+                    $("#rating-star-"+ix).toggleClass('btn-warning');
+                    $("#rating-star-"+ix).toggleClass('btn-default');
+                }
+            })); 
+        });
+
+        function feed()
+        {
+            var subject=document.getElementById("sub").value;
+            var desp=document.getElementById("desp").value;
+            if(selected_value==0 || selected_value1==0 || selected_value2==0 || selected_value3==0 || subject==="" || desp==="")
+                alert("PLEASE FILL ALL DETAILS");
+            else
+            {
+                var https=new XMLHttpRequest();
+                https.addEventListener('load',function(){
+                    window.open("http://localhost:3000/home","_self");
+                });
+                https.open("POST","/feed");
+                https.setRequestHeader('Content-Type','application/json');
+                https.send(JSON.stringify({'bookid':id,'sel':selected_value,'sel1':selected_value1-5,'sel2':selected_value2-10,'sel3':selected_value3-15,'sub':subject,'desp':desp}));
+            }
+        }
+    </script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/html" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="assets/tabs.css">
+  <link rel="stylesheet" href="assets/loading.css">
+  <link rel="stylesheet" href="assets/passwordvalidation.css">
+  <style>
+  input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+  </style>
+</head>
+<body>
+  <%- include ( 'partials/'+message ) %>
+  <section id="main" style="margin-left:40px">
+    <div class="container" style="background-color:#fff;margin-top:70px">
+      <div class="card mx-auto">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12 main-area about-us">
+              <h1 style="border-bottom:1px solid #ccc">Contact Us</h1>
+              <form method="POST" action="/contactus">
+                <label for="fname">User Name</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your username..">
+                <label for="lname">Email id</label>
+                <input type="text" id="lname" name="lastname" placeholder="Your email..">
+                <label for="country">Country</label>
+                <select id="country" name="country">
+                  <option value="australia">Australia</option>
+                  <option value="canada">Canada</option>
+                  <option value="usa">USA</option>
+                </select>
+                <label for="subject">Subject</label>
+                <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+                <input type="submit" value="Submit">
+              </form>
+              <p>EzHomeServices is Noida based e-com Company, founded by group of aspirant with consideration to put the world in more comfort zone via weaving new ideas and implementing it at ground level.</p>
+              <p>With an idea of “Smart Way Easy Life” EzHomeServices is home solution providing company. With EzHomeServices website you can book your desired home service like electrician, plumber, carpenter, cleaner, painter, AC repair, Washing machine repair, and so many other services which serve directly to your door step in your desired timeslot and on affordable prices. In this way ezhomerservices.in makes your life easy and full of comfort.Customer trust and safety is our profit so we have strict criteria for our vendors and supportive staff who are professionals and authenticated and verified by Police administration.</p>
+              <p>We are available 24*7 to assist you any time anywhere.</p>
+              <h2>Our Technicians</h2>
+              <p>We know the value of customer and their relation with us so we used to maintain our contact through our customer for regular inspection of services that we had provide already.</p>
+              <p>Our technicians are highly skilled well equipped and also verified by state police commission in this way we also take care of our customer and provide comfort and safe zone with trust and happiness.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include('partials/footer') %>
+</body>

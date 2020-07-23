@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style>
+  @media (max-width: 767px)
+  {
+    .heading
+    {
+      font-size:20px;
+    }
+  }
+  </style>
+</head>
+<body class="bg-light">
+  <%- include('partials/site_header') %>
+  <section id="main" style="margin-left:50px">
+    <div class="container mt-5">
+      <div class="card mx-auto">
+        <div class="card-body">
+          <div class="row justify-content-center" style="background-color:#ffff">
+            <h1 class="heading">Carpenter Services</h1>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="carp.jpg" class="border w-100 rounded shadow">
+                </div>
+                <div class="col-md-6">
+                  <h1 class="heading">Visit Charge : ₹ 149*</h1>
+                  <p><small><b>Go Cashless:</b><br>Pay Online after your service PayTm and other.</small></p>
+                  <p><small><b>Professionals</b><br>Inhouse Verified and Trained Professionals.</small></p>
+                  <p><small><b>Service Guarantee</b><br>Service Guarantee Upto 365 Days of Service.</small></p>
+                  <input type="button" id="bookMyService" onclick="window.location.assign('/bookingform')" value="BOOK" class="btn btn-info w-75">
+                  <ul>
+                    <li><small>₹ 199 will be charged for 1st hour.</small></li>
+                    <li><small>₹ 99 will be charged for next 30 minutes following to 1st hour.</small></li>
+                    <li><small>₹ 99 will be charged in case of Inspection only.</small></li>
+                    <li><small>Material procurement time will be included in service time.</small></li>
+                    <li><small>Required Material cost is excluded from above cost.</small></li>
+                    <li><small>₹ Cash after Service Available. <i class="fa fa-check text-success"></i></small></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small>Carpentry, the word which is enormously indulges under your home requirements.</small>
+          <h3 class="mt-2"><b>Whenever you need pipes operation? <i class="fa fa-arrow-right"></i></b></h3>
+          <small>In the time of holidays through painting cleaning which comes under restoration, but wait around for some time you abruptly discovered that anything relating to furniture segment additionally scratch the mind, you need to give up touch to your home. Your furniture fixing and additionally needs some polish. Your couch covers became destroyed area to a wood or spot warm snatching your furniture there and here. Under second part you matter you need to switch from renting to your very own home that is bought, but you saw the furniture will not be satisfied to your option when you do this and you would like to replace them by one that is new.</small>
+          <br>
+          <br>
+          <small>Whenever you become parents a fresh cupboard is definitely required. You could purchase new furniture however, you have to acknowledge rdquo & OLD Is GOLD. You know small touch ups made matter glamorous. Occasionally your toilet door gets resists or jammed increasing your disposition temperature while you becoming late for office and closing due to wooden wetness issue.</small>
+          <br>
+          <br>
+          <small>Need to design a magnificent office with attentively placement of furniture's and you've got intended to start your company. You happen to be going to start a new school as well as needs furniture's for management and classroom</small>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include('partials/footer') %>
+</body>

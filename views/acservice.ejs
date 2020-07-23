@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style>
+  @media (max-width: 767px)
+  {
+    .heading
+    {
+      font-size:20px;
+    }
+  }
+  </style>
+</head>
+<body class="bg-light">
+  <%- include('partials/site_header') %>
+  <section id="main" style="margin-left:50px">
+    <div class="container mt-5">
+      <div class="card mx-auto">
+        <div class="card-body">
+          <div class="row justify-content-center" style="background-color:#ffff">
+            <h1 class="heading">AC Installation Repair Services</h1>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="acse.jpg" class="border w-100 rounded shadow">
+                </div>
+                <div class="col-md-6">
+                  <h1 class="heading">Visit Charge : ₹ 149*</h1>
+                  <p><small><b>Go Cashless:</b><br>Pay Online after your service PayTm and other.</small></p>
+                  <p><small><b>Professionals</b><br>Inhouse Verified and Trained Professionals.</small></p>
+                  <p><small><b>Service Guarantee</b><br>Service Guarantee Upto 365 Days of Service.</small></p>
+                  <input type="button" id="bookMyService" onclick="window.location.assign('/bookingform')" value="BOOK" class="btn btn-info w-75">
+                  <ul>
+                    <li><small>₹ Cash after Service Available. <i class="fa fa-check text-success"></i></small></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-2">
+            <small>AC unit is one of the most advanced and regularly using appliances in your home, office, industry and vehicles or anywhere you want to alter the condition of air in compare to outside atmosphere.</small>
+            <br>
+            <small>AC consist HVAC system generally stated as Heating Cooling Air conditioning system in which we significantly choose cooling system.</small>
+            <br>
+            <small>Heating, cooling, humidification, de humidification, cleaning, ventilation, or air movement like procedure are very popular under complete AC function and often used during AC repairing and installation.</small>
+            <br>
+            <small>Excess of anything is worse. In the same way though we installed Ac for our comfort but due to tight timing schedule and lack of concentration we ignore the problems regular occurring in your AC unit.</small>
+          </div>
+          <h3 class="mt-2"><b>cases <i class="fa fa-arrow-right"></i></b></h3>
+          <small><b>Irregularities in AC operation</b></small>
+          <br>
+          <br>
+          <ul type="none">
+            <li>Sometimes during summer when you return from long drive or escaped from choked traffic and need a quick sleep but failed.. Damn! The AC unit on other side surrender itself from cooling more.</li>
+            <li>Considering another case, you are going to celebrate your kid’s birthday party with gathering of relatives and neighbours and at initial stage your AC unit didn’t respond anymore when you the switch on.</li>
+            <li>Another one is, in the midnight you feel yourself sweating because AC unit face On Off situation randomly.</li>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include('partials/footer') %>
+</body>

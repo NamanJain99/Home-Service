@@ -1,0 +1,170 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <style>
+  .wid
+  {
+    margin-top:70;
+  }
+  .allSides
+  {
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -o-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  }
+  .back {
+    background-color: #c2d6d6;
+  }
+  </style>
+</head>
+<body>
+    <%- include('partials/adminheader') %>
+<div class="modal fade" id="popUp" role="dialog" style="z-index:9999">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">  
+            <h4 class="modal-title" id="mailheader" style="text-align:left">Send Reminder Mail</h4>
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+            <!------------------------------------------------------------------------------------>
+                <div class="form-horizontal"> <!-- form -->
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">To:</label>
+                        <div class="col-sm-10">
+                        <input type="email" name="username" class="form-control" id="emailPop" readonly="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Subject:</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12"><!--Body-->
+                        <div id="editor" style="width:100%;height:200px;border-radius:5px;border:1;"  ></div> 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-success" id="mailbutton" style="float:right" data-dismiss="modal">Send</button>
+                        </div>
+                    </div>
+                </div> <!-- form -->
+            <!---------------------------------------------------------------------------------->
+            </div>
+        </div>
+    </div>
+</div>
+  <center>
+    <div id="main" class="wid container">
+      <h1>All feedbacks of this user</h1><br>
+      <ul class="list-group" id="completed"></ul>
+    </div>
+  </center>
+</body>
+<script>
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+var id=urlParams.get('myvar');
+var ul3=document.getElementById("completed");
+
+var temp=new XMLHttpRequest();
+temp.addEventListener('load',function(){
+    var info=(JSON.parse(temp.responseText));
+    info.forEach(element=>
+    {
+        var temp=new XMLHttpRequest();
+        temp.addEventListener('load',function(){
+            var info1=(JSON.parse(temp.responseText));
+            console.log(info1);
+            if(info1.length!=0)
+            {
+                var li=document.createElement('li');
+                li.className="list-group-item list-group-item-action allsides";
+
+                var p=document.createElement('pre');
+                p.setAttribute("class","lead back");
+                p.innerHTML="Booking Id - "+info1[0].bookid;
+                li.appendChild(p);
+
+                var but=document.createElement('button');
+                but.type= "button";
+                but.setAttribute("class", "btn btn-primary");
+                but.innerHTML="Send Mail to User";
+                but.setAttribute("id", info1[0]._id);
+                but.setAttribute("style","float: right;")
+                but.setAttribute('onclick', 'send("'+element.email+'")');
+                but.setAttribute("data-toggle", "modal");
+                but.setAttribute("data-target", "#popUp");
+                li.appendChild(but);
+
+                var p1=document.createElement('pre');
+                p1.setAttribute("class","lead");
+                p1.setAttribute("align","left");
+                p1.setAttribute("background-color","#d1e0e0");
+                p1.innerHTML="Overall rating - "+info1[0].overRating+"<br>Pro Rating - "+info1[0].proRating+"<br>Time Rating - "+info1[0].timeRating+"<br>Service Rating - "+info1[0].serviceRating;
+                li.appendChild(p1);
+
+                var p2=document.createElement('p');
+                p2.setAttribute("class","lead");
+                p2.setAttribute("align","left");
+                p2.setAttribute("background-color","#d1e0e0");
+                p2.innerHTML="Subject - "+info1[0].headline;
+                li.appendChild(p2);
+
+                var p3=document.createElement('p');
+                p3.setAttribute("class","lead");
+                p3.setAttribute("align","left");
+                p3.setAttribute("background-color","#d1e0e0");
+                p3.innerHTML="Review - "+info1[0].review;
+                li.appendChild(p3);
+
+
+                ul3.appendChild(li);
+
+                var br=document.createElement('br');
+                ul3.appendChild(br);
+                ul3.appendChild(br);
+                ul3.appendChild(br);
+            }
+        });
+        temp.open("POST","/getfeed",false);
+        temp.setRequestHeader('Content-Type','application/json');
+        temp.send(JSON.stringify({'bookid':element._id}));
+    });
+});
+temp.open("POST","/checkrev");
+temp.setRequestHeader('Content-Type','application/json');
+temp.send(JSON.stringify({'bookid':id}));
+
+function send(email)
+{
+    var btn=document.getElementById("mailbutton");
+    var id=document.getElementById("emailPop");
+    var sub=document.getElementById("subject");
+    id.value=email;
+    btn.onclick=function()
+    {
+        var mail=new XMLHttpRequest();
+        mail.open("POST","/send");
+        mail.setRequestHeader("Content-Type", "application/json");
+        mail.send(JSON.stringify({'email':email,'sub':sub.value,'write':editor.container.firstChild.innerHTML}));
+    }
+}
+var editor = new Quill('#editor', {
+        theme: 'snow'
+});
+
+</script>
+</html>

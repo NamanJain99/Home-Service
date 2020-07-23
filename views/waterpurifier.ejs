@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style>
+  @media (max-width: 767px)
+  {
+    .heading
+    {
+      font-size:20px;
+    }
+  }
+  </style>
+</head>
+<body class="bg-light">
+  <%- include('partials/site_header') %>
+  <section id="main" style="margin-left:50px">
+    <div class="container mt-5">
+      <div class="card mx-auto">
+        <div class="card-body">
+          <div class="row justify-content-center" style="background-color:#ffff">
+            <h1 class="heading">Water-Purifier Services</h1>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="wate.jpg" class="border w-100 rounded shadow">
+                </div>
+                <div class="col-md-6">
+                  <h1 class="heading">Visit Charge : ₹ 149*</h1>
+                  <p><small><b>Go Cashless:</b><br>Pay Online after your service PayTm and other.</small></p>
+                  <p><small><b>Professionals</b><br>Inhouse Verified and Trained Professionals.</small></p>
+                  <p><small><b>Service Guarantee</b><br>Service Guarantee Upto 365 Days of Service.</small></p>
+                  <input type="button" id="bookMyService" onclick="window.location.assign('/bookingform')" value="BOOK" class="btn btn-info w-75">
+                  <ul>
+                    <li><small>₹ Cash after Service Available. <i class="fa fa-check text-success"></i></small></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <small>The world is facing a scarcity of pure drinking water. That is probably one of the reasons why water filtration systems are installed in almost every home. You too must have installed such an appliance in your house.</small>
+            <br>
+            <small>Often, appliances in your home can face problems. There may be minor and major issues that need to be taken care of. Sometimes minor issue can resolve easily by your handyman skills but what about major issues?</small>
+            <br>
+            <small>Let’s discuss the major problems related to your water purifier.</small>
+          </div>
+          <h3 class="mt-2"><b>Cases When you need RO technician? <i class="fa fa-arrow-right"></i></b></h3>
+          <ul type="none">
+            <li>One of the commonest problems that occur with the water filtration system is deposition of sediments. The water dispenser of the purifier in your home may release water at a slow pace. And it is one of main point to be concern and you must require a RO technician.</li>
+            <li class="mt-1">If you are noticing that it is taking too long for you to fill a glass of water from your purifier, be sure that there is a problem with the dispenser of the filtration system.</li>
+            <li class="mt-1">You feel thirsty and move towards your purifier to fill a glass from filtered water. Did you notice weird noises from the water filtration system? You must take the matter seriously and look for repair or replacement service. But how it becomes possible easily?</li>
+            <li class="mt-1">You found something creepy happen with your purifier system when you found broken UV treatment section or damage push fit connectors. You must need a technician in case of confusion.</li>
+            <li class="mt-1">Another common problem that occurs with the water filtration system is the problem with the filters. If you notice sediments in water or if the water tastes weird, you must remember that there must be some problem with the filters and impure waters from filters can make you seriously.</li>
+            <li class="mt-1">There are filters running on electricity. These filters would not work if there is a short circuit happens with wiring. When there is no electricity, you would not get filtered water, and it becomes serious issue when no nearby technician is available.</li>
+            <li class="mt-1">You are going to be home owner in one of metro city; you must need to install a water purifier system regarding your health issue. You must need an expert to make it possible.</li>
+            <li class="mt-1">The water purifier system of your office got blocked due to choked filter and you need urgent service but what to do to make it happen soon.</li>
+          </ul>
+          <small>We provide you complete solution on the behalf of RO services directly to your doorstep at single knock.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include('partials/footer') %>
+</body>

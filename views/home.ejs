@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+.border:hover
+{
+  transform: perspective(500px) translateZ(40px);
+  width:25%;
+}
+a:hover
+{
+  cursor: pointer;
+}
+section
+{
+  padding: 60px 0;
+}
+section .section-title
+{
+  text-align:center;
+  margin-bottom:50px;
+  text-transform:uppercase;
+}
+#what-we-do
+{
+  background:#ffffff;
+}
+#what-we-do .card
+{
+  padding: 1rem!important;
+  border: none;
+  margin-bottom:1rem;
+  -webkit-transition: .5s all ease;
+  -moz-transition: .5s all ease;
+  transition: .5s all ease;
+}
+#what-we-do .card:hover
+{
+  -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+  -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+  box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+}
+#what-we-do .card .card-block
+{
+  padding-left: 50px;
+  position: relative;
+}
+#what-we-do .card .card-block a
+{
+  font-weight:700;
+  text-decoration:none;
+}
+#what-we-do .card .card-block a i
+{
+  display:none;
+}
+@-webkit-keyframes spin
+{ 100% { -webkit-transform: rotate(360deg); } }
+.rounded-circle:hover
+{
+   -webkit-animation:spin 0.8s ease-in-out 1;
+}
+/*@media (max-width: 767px)
+{
+    .st
+		{
+        width:40px;
+        margin-left:40px;
+    }
+}*/
+</style>
+<body>
+  <%- include ('partials/site_header') %>
+  <div id="main" style="margin-left:50px;">
+  <section id="what-we-do">
+    <div class="container">
+      <h2 class="section-title mb-2">ALl Trending HomeServices</h2>
+      <hr>
+			<div class="row mt-5">
+				<div class="col-md-2">
+					<a class="card bg-info" style="color:#000;" href="/acservice">
+            <div class="col-m-6">
+              <img src="ac-services.png" alt="AC-services" class=" my-auto rounded-circle" style="width:60px;"/>
+            </div>
+            <div class="col-m-6">
+              <h5 class="my-auto mx-auto card-title">AC-services</h5>
+            </div>
+          </a>
+        </div>
+				<div class="col-md-2">
+					<a class="card bg-info" style="color:#000;" href="/carpentry">
+            <div class="col-m-6">
+              <img src="carpentry.png" alt="Carpentry" class=" my-auto rounded-circle" style="width:60px;"/>
+            </div>
+            <div class="col-m-6">
+              <h5 class="my-auto mx-auto card-title">Carpentry</h5>
+            </div>
+					</a>
+				</div>
+				<div class="col-md-2">
+					<a class="card bg-info" style="color:#000;" href="/cleaning">
+            <div class="col-m-6">
+              <img src="cleaning.png" alt="Cleaning" class=" my-auto rounded-circle" style="width:60px;"/>
+            </div>
+            <div class="col-m-6">
+              <h5 class="my-auto mx-auto card-title">Cleaning</h5>
+            </div>
+					</a>
+				</div>
+        <div class="col-md-2">
+					<a class="card bg-info" style="color:#000;" href="/electrician">
+            <div class="col-m-6">
+              <img src="ele-icon.png" alt="Electrician" class=" my-auto rounded-circle" style="width:60px;"/>
+            </div>
+            <div class="col-m-6">
+              <h5 class="my-auto mx-auto card-title">Electrician</h5>
+            </div>
+					</a>
+				</div>
+        <div class="col-md-2">
+					<a class="card bg-info" style="color:#000;" href="/geyser">
+            <div class="col-m-6">
+              <img src="geyser.png" alt="geyser" class=" my-auto rounded-circle" style="width:60px;"/>
+            </div>
+            <div class="col-m-6">
+              <h5 class="my-auto mx-auto card-title">Geyser</h5>
+            </div>
+					</a>
+				</div>
+        <div class="col-md-2">
+					<a class="card bg-info" style="color:#000;" href="/kitchen">
+            <div class="col-m-6">
+              <img src="Kitchen-app.png" alt="Kitchen" class=" my-auto rounded-circle" style="width:60px;"/>
+            </div>
+            <div class="col-m-6">
+              <h5 class="my-auto mx-auto card-title">Kitchen</h5>
+            </div>
+					</a>
+				</div>
+      </div>
+			<div class="row mt-1">
+				<div class="col-md-2">
+					<a class="card bg-info" style="color:#000;" href="/microwave">
+            <div class="col-m-6">
+              <img src="microwave-oven.png" alt="Microwave-oven" class=" my-auto rounded-circle" style="width:60px;"/>
+            </div>
+            <div class="col-m-6">
+              <h5 class="my-auto mx-auto card-title">Microwave</h5>
+            </div>
+					</a>
+				</div>
+				<div class="col-md-2">
+					<a class="card bg-info" style="color:#000;" href="/plumber">
+            <div class="col-m-6">
+              <img src="plumbing.png" alt="Plumbing" class=" my-auto rounded-circle" style="width:60px;"/>
+            </div>
+            <div class="col-m-6">
+              <h5 class="my-auto mx-auto card-title">Plumbing</h5>
+            </div>
+					</a>
+				</div>
+				<div class="col-md-2">
+					<a class="card bg-info" style="color:#000;" href="/waterpurifier">
+            <div class="col-m-6">
+              <img src="water-purifier.png" alt="waterpurifier" class="my-auto rounded-circle" style="width:60px;"/>
+            </div>
+            <div class="col-m-6">
+              <h5 class="my-auto mx-auto card-title">Waterpurifier</h5>
+            </div>
+					</a>
+				</div>
+        <div class="col-md-2">
+					<a class="card bg-info" style="color:#000;" href="/pestcontrol">
+            <div class="col-m-6">
+              <img src="pesting.png" alt="John Doe" class="mx-auto rounded-circle" style="width:60px;"/>
+            </div>
+            <div class="col-m-6">
+              <h5 class="my-auto mx-auto card-title">Pest Control</h5>
+            </div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+  <div class="container st" style="text-align:center;">
+    <h1>OUR WORKFLOW</h1>
+    <hr>
+    <p class="text-center text-muted h5">"Enjoy Your Required Service At 3 Steps Ahead"</p>
+    <div class="row my-5">
+      <div class="col-md-4 border bg-info">
+        <h3 class="py-auto">Step <span class="circle">1</span></h3>
+        <hr>
+        <div class="col-xs-12 col-md-12">
+          <img src="step1.png" width="100px">
+        </div>
+        <div class="col-xs-12">
+          <h4>Schedule Your Service</h4>
+          <p>Fill Credential, Book Service &amp; Relax</p>
+        </div>
+      </div>
+      <div class="col-md-4 border bg-info">
+        <h3>Step <span class="circle">2</span></h3>
+        <hr>
+        <div class="col-xs-12 col-md-12">
+          <img src="step2.png" width="100px">
+        </div>
+        <div class="col-xs-12">
+          <h4>Service At Your Home</h4>
+          <p>Keep Calm, We Will Serve At Your Door</p>
+        </div>
+      </div>
+      <div class="col-md-4 border bg-info">
+        <h3>Step <span class="circle">3</span></h3>
+        <hr>
+        <div class="col-xs-12 col-md-12">
+          <img src="step3.png" width="100px">
+        </div>
+        <div class="col-xs-12">
+          <h4>Pay After Service</h4>
+          <p>Make Payment After Job Get Done</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<div class="modal" id="signupModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">SIGNUP</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <ul class="nav nav-tabs">
+        <li class="active tt w-50 text-center" id="userbutton"><a data-toggle="tab" onClick="togletouser()">AS USER</a></li>
+        <li class="tt w-50 text-center" id="probutton"><a data-toggle="tab" onClick="togletopro()">AS PRO</a></li>
+      </ul>
+      <!-- Modal body -->
+      <div class="modal-body" id="userform">
+        <div id="u">
+          <form>
+            <div class="form-group">
+              <small id="signupHelp" class="form-text text-success"></small>
+            </div>
+            <div class="form-group">
+              <label for="username">User Name</label>
+              <input type="username" class="form-control" id="username" placeholder="Enter Username" required>
+              <small id="usernameHelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="phone" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="Enter phone" value="">
+              <small id="phoneHelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" value="">
+              <small id="emailHelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+              <label for="password1">Password</label>
+              <input type="password" class="form-control" id="password1" placeholder="Password" value="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+              <div class="container" id="message">
+                <small><b>Password must contain the following:</b></small><br>
+                <small id="letter" class="invalid">A lowercase letter</small><br>
+                <small id="capital" class="invalid">A capital (uppercase) letter</small><br>
+                <small id="number" class="invalid">A number</small><br>
+                <small id="length" class="invalid">Minimum 8 characters</small>
+              </div>
+              <small id="password1Help" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+              <label for="password2">Confirm Password</label>
+              <input type="password" class="form-control" id="password2" placeholder="Confirm Password" value="">
+              <small id="password2Help" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group" id="profession" style="display:none">
+              <label for="profession">Choose Profession</label>
+              <select required class="form-control" name="Profession" id="prof">
+                <option selected="selected" value="0">Select the service you provide</option>
+                <option value="AC">AC</option>
+                <option value="Carpenter">Carpenter</option>
+                <option value="Home Cleaning">HomeCleaning</option>
+                <option value="Electrician">Electrician</option>
+                <option value="Geyser">Geyser</option>
+                <option value="Kitchen Tools">KitchenTools</option>
+                <option value="Microwave Oven">MicrowaveOven</option>
+                <option value="Plumber">Plumber</option>
+                <option value="Water Purifier">WaterPurifier</option>
+                <option value="Pest Control">PestControl</option>
+              </select>
+            </div>
+            <div class="form-group" id="location" style="display:none">
+              <label for="Location">Choose Location</label>
+              <select required class="form-control" name="Location" id="loca">
+                <option selected="selected" value="0">Select the city where you provide service</option>
+                <option value="Allahabad City">Allahabad City</option>
+                <option value="Amritsar City">Amritsar City</option>
+                <option value="Bhopal City">Bhopal City</option>
+                <option value="Chandigarh City">Chandigarh City</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Faridabad">Faridabad</option>
+                <option value="Ghaziabad">Ghaziabad</option>
+                <option value="Greater Noida">Greater Noida</option>
+                <option value="Gurgaon">Gurgaon</option>
+                <option value="Indore City">Indore City</option>
+                <option value="Jaipur City">Jaipur City</option>
+                <option value="Kanpur City">Kanpur City</option>
+                <option value="Kota City">Kota City</option>
+                <option value="Lucknow City">Lucknow City</option>
+                <option value="Ludhiana City">Ludhiana City</option>
+                <option value="Mumbai City">Mumbai City</option>
+                <option value="Nagpur City">Nagpur City</option>
+              </select>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-body" id="proform" style="display:none">
+
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="checkvalidationsignup()">Submit</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  var password1=document.getElementById("password1");
+  var letter=document.getElementById("letter");
+  var capital=document.getElementById("capital");
+  var number=document.getElementById("number");
+  var length=document.getElementById("length");
+  var url="/newuser";
+  password1.onfocus=function()
+  {
+    document.getElementById("message").style.display="block";
+  }
+  password1.onblur=function()
+  {
+    document.getElementById("message").style.display="none";
+  }
+  password1.onkeyup=function()
+  {
+    var lowerCaseLetters=/[a-z]/g;
+    if(password1.value.match(lowerCaseLetters))
+    {
+      letter.classList.remove("invalid");
+      letter.classList.add("valid");
+    }
+    else
+    {
+      letter.classList.remove("valid");
+      letter.classList.add("invalid");
+    }
+    var upperCaseLetters=/[A-Z]/g;
+    if(password1.value.match(upperCaseLetters))
+    {
+      capital.classList.remove("invalid");
+      capital.classList.add("valid");
+    }
+    else
+    {
+      capital.classList.remove("valid");
+      capital.classList.add("invalid");
+    }
+    var numbers=/[0-9]/g;
+    if(password1.value.match(numbers))
+    {
+      number.classList.remove("invalid");
+      number.classList.add("valid");
+    }
+    else
+    {
+      number.classList.remove("valid");
+      number.classList.add("invalid");
+    }
+    if(password1.value.length>=8)
+    {
+      length.classList.remove("invalid");
+      length.classList.add("valid");
+    }
+    else
+    {
+      length.classList.remove("valid");
+      length.classList.add("invalid");
+    }
+  }
+  function togletouser()
+  {
+    var userform=document.getElementById("userform");
+    var proform=document.getElementById("proform");
+    var userbutton=document.getElementById("userbutton");
+    var probutton=document.getElementById("probutton");
+    var u=document.getElementById('u');
+    document.getElementById("location").style.display="none";
+    document.getElementById("profession").style.display="none";
+    url="/newuser";
+    if(probutton.classList.contains("active"))
+    {
+      userform.style.display="block";
+      userbutton.classList.add("active");
+      probutton.classList.remove("active");
+      proform.style.display="none";
+      u.parentNode.removeChild(u);
+      userform.appendChild(u);
+    }
+  }
+  function togletopro()
+  {
+    var userform=document.getElementById("userform");
+    var proform=document.getElementById("proform");
+    var userbutton=document.getElementById("userbutton");
+    var probutton=document.getElementById("probutton");
+    document.getElementById("location").style.display="block";
+    document.getElementById("profession").style.display="block";
+    var u=document.getElementById('u');
+    url="/newpro";
+    if(userbutton.classList.contains("active"))
+    {
+      proform.style.display="block";
+      probutton.classList.add("active");
+      userbutton.classList.remove("active");
+      userform.style.display="none";
+      u.parentNode.removeChild(u);
+      proform.appendChild(u);
+    }
+  }
+  function checkvalidationsignup()
+  {
+    var signuphelp=document.getElementById("signupHelp");
+    var phone=document.getElementById("phone");
+    var email=document.getElementById("email");
+    var username=document.getElementById("username");
+    var password1=document.getElementById("password1");
+    var password2=document.getElementById("password2");
+    var location=document.getElementById("loca");
+    var profession=document.getElementById("prof");
+
+    var phonehelp=document.getElementById("phoneHelp");
+    var emailhelp=document.getElementById("emailHelp");
+    var usernamehelp=document.getElementById("usernameHelp");
+    var password1help=document.getElementById("password1Help");
+    var password2help=document.getElementById("password2Help");
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    usernamehelp.style.display="none";
+    emailhelp.style.display="none";
+    phonehelp.style.display="none";
+    password1help.style.display="none";
+    password2help.style.display="none";
+    if(username.value=='')
+    {
+      usernamehelp.innerHTML="FIELD IS EMPTY";
+      usernamehelp.style.display="inline-block";
+    }
+    else if(phone.value=='')
+    {
+      phonehelp.innerHTML="FIELD IS EMPTY";
+      phonehelp.style.display="inline-block";
+    }
+    else if(email.value=='')
+    {
+      emailhelp.innerHTML="FIELD IS EMPTY";
+      emailhelp.style.display="inline-block";
+    }
+    else if(!email.value.match(mailformat))
+    {
+      emailhelp.innerHTML="INVALID EMAIL";
+      emailhelp.style.display="inline-block"
+    }
+    else if(letter.classList.contains("invalid") || capital.classList.contains("invalid") || number.classList.contains("invalid") || length.classList.contains("invalid"))
+  	{
+  		document.getElementById("message").style.display="block";
+  	}
+    else if((password1.value.localeCompare(password2.value))==0 && password1.value=='')
+    {
+      password1help.innerHTML="FIELD IS EMPTY";
+      password1help.style.display="inline-block"
+    }
+    else if((password1.value.localeCompare(password2.value))!=0)
+    {
+      if(password1.value=='')
+      {
+        password1help.innerHTML="FIELD IS EMPTY";
+        password1help.style.display="inline-block"
+      }
+      else
+      {
+        password2help.innerHTML="password doesnot match";
+        password2help.style.display="inline-block";
+      }
+    }
+    else if(url==="/newpro" && profession.value=="0")
+    {
+      profession.className+=" invalid";
+    }
+    else if(url==="/newpro" && location.value=="0")
+    {
+      location.className+=" invalid";
+    }
+    else
+    {
+      if(url==="/newuser")
+      {
+        var ob=new Object({
+          'phone':phone.value,
+          'email':email.value,
+          'username':username.value,
+          'password':password1.value
+        })
+      }
+      else
+      {
+        var ob=new Object({
+          'phone':phone.value,
+          'email':email.value,
+          'username':username.value,
+          'password':password1.value,
+          'location':location.value,
+          'profession':profession.value
+        })
+      }
+      var user=new XMLHttpRequest();
+      user.addEventListener('load',function()
+      {
+        if(typeof JSON.parse(user.response).errors != "undefined")
+        {
+          if(JSON.parse(user.response).errors.username)
+          {
+            usernamehelp.innerHTML="Username already exsisit";
+            usernamehelp.style.display="inline-block";
+          }
+          else if(JSON.parse(user.response).errors.phone)
+          {
+            phonehelp.innerHTML="phone already exsist";
+            phonehelp.style.display="inline-block";
+          }
+          else if(JSON.parse(user.response).errors.email)
+          {
+            emailhelp.innerHTML="email already exsist";
+            emailhelp.style.display="inline-block";
+          }
+        }
+        else
+        {
+          signuphelp.innerHTML="Account Successfully Created";
+          signuphelp.style.display="inline-block";
+        }
+      });
+      user.open("POST",url);
+      user.setRequestHeader('Content-Type','application/json');
+      user.send(JSON.stringify(ob));
+    }
+  }
+</script>

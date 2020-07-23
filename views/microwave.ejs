@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style>
+  @media (max-width: 767px)
+  {
+    .heading
+    {
+      font-size:20px;
+    }
+  }
+  </style>
+</head>
+<body class="bg-light">
+  <%- include('partials/site_header') %>
+  <section id="main" style="margin-left:50px">
+    <div class="container mt-5">
+      <div class="card mx-auto">
+        <div class="card-body">
+          <div class="row justify-content-center" style="background-color:#ffff">
+            <h1 class="heading">Microwave-Oven Repairing Services</h1>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="micr.jpg" class="border w-100 rounded shadow">
+                </div>
+                <div class="col-md-6">
+                  <h1 class="heading">Visit Charge : ₹ 149*</h1>
+                  <p><small><b>Go Cashless:</b><br>Pay Online after your service PayTm and other.</small></p>
+                  <p><small><b>Professionals</b><br>Inhouse Verified and Trained Professionals.</small></p>
+                  <p><small><b>Service Guarantee</b><br>Service Guarantee Upto 365 Days of Service.</small></p>
+                  <input type="button" id="bookMyService" onclick="window.location.assign('/bookingform')" value="BOOK" class="btn btn-info w-75">
+                  <ul>
+                    <li><small>₹ Cash after Service Available. <i class="fa fa-check text-success"></i></small></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <small>Time is Money and everyone is busy to convert it. Behalf of this quotation, technology brings us in a phase where money is used to save our times by invention of so many house holding appliances.</small>
+            <br>
+            <small>Microwave oven is one of those appliances which are tech-born and used in most of the homes in kitchen section. Oven is used to bake the food.</small>
+            <br>
+            <small>But it also suffers hiccups like other electronic devices</small>
+            <h3 class="mt-2"><b>Cases When you need an expert? <i class="fa fa-arrow-right"></i></b></h3>
+          </div>
+          <ul>
+            <li>You are baking your pre-processed food but it takes long time to bake them properly.</li>
+            <li>Power button doesn’t respond smoothly.</li>
+            <li>Oven started over heating during function.</li>
+            <li>Your noodles got burnt or spongy when you cooked it into your oven.</li>
+            <li>Short-circuits happen sometime due voltage fluctuation force you to hire a microwave expert.</li>
+          </ul>
+          <small>We are trustworthy and expert in serving best quality services.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include('partials/footer') %>
+</body>

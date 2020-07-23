@@ -1,0 +1,104 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+  .wid
+  {
+    margin-top:70;
+  }
+  .allSides
+  {
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -o-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  }
+  .back {
+    background-color: #c2d6d6;
+  }
+  </style>
+</head>
+<body>
+  <%- include ('partials/pro_header') %>
+  <center>
+    <div id="main" class="wid container">
+      <h1>Bookings Available</h1><br>
+      <ul class="list-group" id="avail"></ul>
+    </div>
+  </center>
+  <%- include('partials/pro_footer') %>
+</body>
+<script>
+var ul=document.getElementById('avail');
+var data= new XMLHttpRequest();
+data.open("GET", "/avail");
+data.onload=function()
+{
+  var info=(JSON.parse(data.responseText));
+  info.forEach(element=>
+  {
+    var li=document.createElement('li');
+    li.className="list-group-item list-group-item-action allsides";
+
+    var but=document.createElement('button');
+    but.type= "button";
+    but.setAttribute("class", "btn btn-primary");
+    but.setAttribute("style","float: right;")
+    but.innerHTML="Accept";
+    but.setAttribute("id", element._id);
+    but.setAttribute('onclick', 'acceptItem("'+element._id+'")');
+    li.appendChild(but);
+
+    var p=document.createElement('pre');
+    p.setAttribute("class","lead");
+    p.setAttribute("align","left");
+    p.setAttribute("background-color","#d1e0e0");
+    p.innerHTML="    Address - "+element.address+"<br>    Pin code - "+element.pinCode+"<br>    Date - "+element.date+"<br>    Time - "+element.time;
+    li.appendChild(p);
+
+    var p1=document.createElement('pre');
+    p1.setAttribute("class","lead");
+    p1.setAttribute("align","left");
+    p1.setAttribute("background-color","#d1e0e0");
+    p1.innerHTML="    User Name - "+element.name+"<br>    User email - "+element.email+"<br>    User Mobile - "+element.mobileNo+"<br>    Services:-";
+    li.appendChild(p1);
+
+    var ull=document.createElement('ul');
+    element.order.forEach(ele=>{
+      var lii=document.createElement("li");
+      lii.className="list-group-item list-group-item-action allsides";
+      lii.innerHTML="Service  - "+ele.service+"    Sub service - "+ele.subService+"    Quantity - "+ele.quantity;
+      ull.appendChild(lii);
+      var br=document.createElement('br');
+      ull.appendChild(br);
+    })
+    li.appendChild(ull);
+    ul.appendChild(li);
+
+    var br=document.createElement('br');
+    ul.appendChild(br);
+    ul.appendChild(br);
+    ul.appendChild(br);
+  });
+};
+data.send();
+
+function acceptItem(itemid)
+{
+  var service=new XMLHttpRequest();
+  service.addEventListener('load',function()
+  {
+    location.reload();
+  });
+  service.open("POST",'/accept');
+  service.setRequestHeader('Content-Type','application/json');
+  service.send(JSON.stringify({'id':itemid}));
+}
+</script>
+</html>

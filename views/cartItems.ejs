@@ -1,0 +1,139 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+  .wid
+  {
+    margin-top:70;
+  }
+  .allSides
+  {
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -o-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  }
+  .back {
+    background-color: #c2d6d6;
+  }
+  </style>
+</head>
+
+<body>
+  <%- include('partials/site_header') %>
+  <center>
+    <div id="main" class="wid container">
+      <h1>Cart Items</h1><br>
+      <ul class="list-group" id="list"></ul>
+    </div>
+  </center>
+  <%- include('partials/footer') %>
+</body>
+
+<script>
+  var ul=document.getElementById('list');
+  var data= new XMLHttpRequest();
+  data.open("GET", "/allCartItems");
+  data.onload=function()
+  {
+    var info=(JSON.parse(data.responseText));
+    info.forEach(element=>
+    {
+      var li=document.createElement('li');
+      li.className="list-group-item list-group-item-action allsides";
+
+      var p=document.createElement('pre');
+      p.setAttribute("class","lead back");
+      p.setAttribute("style","margin-left: 40px;")
+      p.innerHTML="Category - "+element.category;
+      li.appendChild(p);
+
+      var ull=document.createElement('ul');
+      element.order.forEach(ele=>{
+        var lii=document.createElement("li");
+        lii.className="list-group-item list-group-item-action allsides";
+        lii.innerHTML="Service  - "+ele.service+"    Sub service - "+ele.subService+"    Quantity - "+ele.quantity;
+
+        var b=document.createElement('button');
+        b.type= "button";
+        b.setAttribute("class", "btn btn-primary");
+        b.setAttribute("style","float: right;")
+        b.innerHTML="X";
+        b.setAttribute("id", ele._id);
+        b.setAttribute('onclick', 'deleteItem("'+element._id+','+ele._id+'")');
+        lii.appendChild(b);
+
+        ull.appendChild(lii);
+        var br=document.createElement('br');
+        ull.appendChild(br);
+      })
+      li.appendChild(ull);
+
+      var but=document.createElement('button');
+      but.type= "button";
+      but.setAttribute("class", "btn btn-primary");
+      but.setAttribute("style","float: left;margin-left:40px")
+      but.innerHTML="Delete";
+      but.setAttribute("id", element._id);
+      but.setAttribute('onclick', 'deleteItems("'+element._id+'")');
+      li.appendChild(but);
+
+      var butt=document.createElement('button');
+      butt.type= "button";
+      butt.setAttribute("class", "btn btn-primary");
+      butt.innerHTML="Proceed to Book";
+      butt.setAttribute("style","float: right;")
+      butt.setAttribute("id", element._id);
+      butt.setAttribute('onclick', 'checkout("'+element._id+'")');
+      li.appendChild(butt);
+
+      ul.appendChild(li);
+
+      var br=document.createElement('br');
+      ul.appendChild(br);
+      ul.appendChild(br);
+      ul.appendChild(br);
+    });
+  };
+  data.send();
+
+  function deleteItems(itemid)
+  {
+    var service=new XMLHttpRequest();
+    service.addEventListener('load',function()
+    {
+      location.reload();
+    });
+    service.open("POST",'/deleteCartItems');
+    service.setRequestHeader('Content-Type','application/json');
+    service.send(JSON.stringify({'id':itemid}));
+  }
+
+  function deleteItem(item)
+  {
+    var id= item.split(',');
+    var itemid=id[0];
+    var partid=id[1];
+    var service=new XMLHttpRequest();
+    service.addEventListener('load',function()
+    {
+      location.reload();
+    });
+    service.open("POST",'/deleteCartItem');
+    service.setRequestHeader('Content-Type','application/json');
+    service.send(JSON.stringify({'itemid':itemid,'partid':partid}));
+  }
+
+  function checkout(itemid)
+  {
+    window.open("http://localhost:3000/bookingform?myvar=" + encodeURI(itemid),"_self");
+  }
+
+</script>
+</html>

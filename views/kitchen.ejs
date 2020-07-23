@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style>
+  @media (max-width: 767px)
+  {
+    .heading
+    {
+      font-size:20px;
+    }
+  }
+  </style>
+</head>
+<body class="bg-light">
+  <%- include('partials/site_header') %>
+  <section id="main" style="margin-left:50px">
+    <div class="container mt-5">
+      <div class="card mx-auto">
+        <div class="card-body">
+          <div class="row justify-content-center" style="background-color:#ffff">
+            <h1 class="heading">Kitchen-Tools Repairing Services</h1>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="kitc.jpg" class="border w-100 rounded shadow">
+                </div>
+                <div class="col-md-6">
+                  <h1 class="heading">Visit Charge : ₹ 149*</h1>
+                  <p><small><b>Go Cashless:</b><br>Pay Online after your service PayTm and other.</small></p>
+                  <p><small><b>Professionals</b><br>Inhouse Verified and Trained Professionals.</small></p>
+                  <p><small><b>Service Guarantee</b><br>Service Guarantee Upto 365 Days of Service.</small></p>
+                  <input type="button" id="bookMyService" onclick="window.location.assign('/bookingform')" value="BOOK" class="btn btn-info w-75">
+                  <ul>
+                    <li><small>₹ Cash after Service Available. <i class="fa fa-check text-success"></i></small></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small>The kitchen in a home is most busy place with respect to all departments...Isn’t it? Just think for a while and you found the above statement is true. From a pinch of salt to cooked food, every time we need to rush to our kitchen. And in the same the way due to excess in use some appliances or tools may suffer hiccups and force you to go to the mechanic.</small>
+          <h3 class="mt-2"><b>Cases When you need a kitchen Doctor? <i class="fa fa-arrow-right"></i></b></h3>
+          <ul type="none">
+            <li>You are going to cook omelette for vacant tummy. When you hold the pan for heating oil it fell down by leaving its handle in your hand. Creep!</li>
+            <li>You need to cook breakfast urgently for your kids but your stove is denying your request to burn properly.</li>
+            <li>You notice some black film on your cooker or bowl while cooking something spicy.</li>
+            <li>Burner shows improper flame irrespective of Nob position.</li>
+            <li>Loose Nob of stove or LPG/PNG regulator gives you unusual headache.</li>
+            <li>Disordered bottom of frying fan gives you bad taste in your recipe.</li>
+            <li>Oven door not working properly may force you to hire a mechanic.</li>
+            <li>LPG kit fitting may necessary when you choose modular kitchen settings.</li>
+          </ul>
+          <small>We are easy to hire, expert in service and trustworthy.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include('partials/footer') %>
+</body>

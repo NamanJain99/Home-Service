@@ -1,0 +1,352 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="/assets/passwordvalidation.css">
+<style>
+body
+{
+	margin:0;
+	padding:0;
+	line-height: 1.42857143;
+}
+.page-footer
+{
+	margin-left:40px;
+}
+.d1
+{
+	top:0;
+	position:fixed;
+	height: 60px;
+	width: 100%;
+	padding: 0px 15px;
+	z-index:1;
+	padding-top: 15px;
+}
+.aa
+{
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 60px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+}
+.d1 span
+{
+	color: white;
+}
+.d1 img
+{
+	cursor: pointer;
+	width: 40px;
+	margin-left: 30px;
+	margin-right: 10px;
+	float: right;
+	border-radius: 50%;
+}
+.sadmin
+{
+	float: right;
+	padding: .3em .50em .3em;
+	font-size: 10px;
+	font-weight: 800;
+	line-height: 1;
+	border-radius: 4px;
+}
+.d2
+{
+	height: 100%;
+	width: 40px;
+	position: fixed;
+	z-index: 1;
+	top: 60px;
+	left: 0;
+	overflow-x: hidden;
+	transition: 0.5s;
+}
+.d2 a
+{
+	display: block;
+	padding: 11px;
+	text-decoration: none;
+	color: #999999;
+	transition: 0.1s;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 15px;
+	white-space: nowrap;
+	cursor: pointer;
+}
+.fa
+{
+	font-size: 21px;
+	padding-right: 10px;
+}
+.d2 a:hover
+{
+	background-color: #111;
+	border-left= 1 solid;
+	border-left-color: red;
+}
+.active
+{
+	background-color: #337AB7;
+}
+.d2 img
+{
+	width: 60px;
+	height: 60px;
+}
+header
+{
+	height: 80px;
+	background-color: white;
+	padding: 10px;
+}
+@media (max-width: 767px)
+{
+    .dr
+		{
+        display:none;
+    }
+}
+.form-text
+{
+	display:none;
+}
+</style>
+</head>
+<body>
+	<div class="modal" id="changepasswordModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">CHANGE PASSWORD</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	      <!-- Modal body -->
+	      <div class="modal-body">
+					<form>
+						<div class="form-group">
+							<small id="changehelp" class="form-text text-success"></small>
+						</div>
+						<div class="form-group">
+							<label for="currentpassword">Current Passsword</label>
+							<input type="password" class="form-control" id="currentpassword" placeholder="Enter Current Password" value="">
+							<small id="currentpasswordhelp" class="form-text text-muted"></small>
+						</div>
+						<div class="form-group">
+							<label for="newpassword">New Password</label>
+							<input type="password" class="form-control" id="newpassword" aria-describedby="newpasswordhelp" placeholder="Enter newpassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+							<div class="container" id="message">
+								<small><b>Password must contain the following:</b></small><br>
+								<small id="letter" class="invalid">A lowercase letter</small><br>
+								<small id="capital" class="invalid">A capital (uppercase) letter</small><br>
+								<small id="number" class="invalid">A number</small><br>
+								<small id="length" class="invalid">Minimum 8 characters</small>
+							</div>
+							<small id="newpasswordhelp" class="form-text text-muted"></small>
+						</div>
+						<div class="form-group">
+							<label for="newpassword">Confirm New Password</label>
+							<input type="password" class="form-control" id="newpassword2" placeholder="Re-Enter Password" value="">
+							<small id="newpassword2help" class="form-text text-muted"></small>
+						</div>
+					</form>
+	      </div>
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-success" onclick="checkvalidationchanpass()">Submit</button>
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal" id="logoutModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">LOGOUT</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="logout">DO YOU REALY WANT TO LOGOUT</label>
+					</div>
+				</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" onclick="logout()">YES</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="div1" class="d1 bg-dark">
+		<span class="dr" style="cursor:pointer;" onclick="funcNav()">&#9776;</span>
+		<span>Home</span>
+	</div>
+	<div class="d2 bg-dark" id="div">
+        <a href="/proHome"><span class="fa"><i class="fa fa-list"></i></span>Bookings Available</a>
+        <a href="/proActive"><span class="fa"><i class="fa fa-tasks"></i></span>Active Bookings</a>
+        <a href="/proComp"><span class="fa"><i class="fa fa-check-circle"></i></span>Completed bookings</a>
+		<a data-toggle="modal" data-target="#changepasswordModal"><span class="fa"><i class="fa fa-lock"></i></span>Change Password</a>
+		<a data-toggle="modal" data-target="#logoutModal"><span class="fa"><i class="fa fa-sign-out"></i></span>Logout</a>
+	</div>
+</body>
+<script>
+var password1=document.getElementById("newpassword");
+var letter=document.getElementById("letter");
+var capital=document.getElementById("capital");
+var number=document.getElementById("number");
+var length=document.getElementById("length");
+password1.onfocus=function()
+{
+	document.getElementById("message").style.display="block";
+}
+password1.onblur=function()
+{
+	document.getElementById("message").style.display="none";
+}
+password1.onkeyup=function()
+{
+	var lowerCaseLetters=/[a-z]/g;
+	if(password1.value.match(lowerCaseLetters))
+	{
+		letter.classList.remove("invalid");
+		letter.classList.add("valid");
+	}
+	else
+	{
+		letter.classList.remove("valid");
+		letter.classList.add("invalid");
+	}
+	var upperCaseLetters=/[A-Z]/g;
+	if(password1.value.match(upperCaseLetters))
+	{
+		capital.classList.remove("invalid");
+		capital.classList.add("valid");
+	}
+	else
+	{
+		capital.classList.remove("valid");
+		capital.classList.add("invalid");
+	}
+	var numbers=/[0-9]/g;
+	if(password1.value.match(numbers))
+	{
+		number.classList.remove("invalid");
+		number.classList.add("valid");
+	}
+	else
+	{
+		number.classList.remove("valid");
+		number.classList.add("invalid");
+	}
+	if(password1.value.length>=8)
+	{
+		length.classList.remove("invalid");
+		length.classList.add("valid");
+	}
+	else
+	{
+		length.classList.remove("valid");
+		length.classList.add("invalid");
+	}
+}
+function funcNav()
+{
+	var div=document.getElementById('div');
+	if(div.style.width=="250px")
+	{
+		div.style.width="40px";
+		document.getElementById("main").style.marginLeft= "40px";
+		document.getElementById("Aboutus").style.marginLeft= "40px";
+	}
+	else
+	{
+		div.style.width="250px";
+		document.getElementById("main").style.marginLeft = "250px";
+		document.getElementById("Aboutus").style.marginLeft = "250px";
+	}
+}
+function checkvalidationchanpass()
+{
+	var changehelp=document.getElementById("changehelp");
+	var currentpassword=document.getElementById("currentpassword");
+	var currentpasswordhelp=document.getElementById("currentpasswordhelp");
+	var newpassword=document.getElementById("newpassword");
+	var newpasswordhelp=document.getElementById("newpasswordhelp");
+	var newpassword2=document.getElementById('newpassword2');
+	var newpassword2help=document.getElementById('newpassword2help');
+	newpassword2help.style.display="none";
+	currentpasswordhelp.style.display="none";
+	newpasswordhelp.style.display="none";
+	changehelp.style.display="none";
+	if(currentpassword.value=="")
+	{
+		currentpasswordhelp.innerHTML="Field Is Empty";
+		currentpasswordhelp.style.display="inline-block";
+	}
+	else if(newpassword.value=="")
+	{
+		newpasswordhelp.innerHTML="Field Is Empty"
+		newpasswordhelp.style.display="inline-block";
+	}
+	else if(newpassword2.value=="")
+	{
+		newpassword2help.innerHTML="Field Is Empty";
+		newpassword2help.style.display="inline-block";
+	}
+	else if(((newpassword.value.localeCompare(newpassword2.value))!=0))
+	{
+		newpassword2help.innerHTML="Password Doesn't Match"
+		newpassword2help.style.display="inline-block";
+	}
+	else if(letter.classList.contains("invalid") || capital.classList.contains("invalid") || number.classList.contains("invalid") || length.classList.contains("invalid"))
+	{
+		document.getElementById("message").style.display="block";
+	}
+	else
+	{
+		var changepass=new XMLHttpRequest();
+		changepass.addEventListener('load',function(req,res)
+		{
+			if(changepass.response=="Password Succesfully Changed")
+			{
+				changehelp.innerHTML=changepass.response;
+				changehelp.style.display="inline-block";
+			}
+			else
+			{
+				currentpasswordhelp.innerHTML=changepass.response;
+				currentpasswordhelp.style.display="inline-block";
+			}
+		});
+		changepass.open('POST','/changepassword')
+		changepass.setRequestHeader('Content-Type','application/json');
+		changepass.send(JSON.stringify({'currentpassword':currentpassword.value,'newpassword':newpassword.value,'ofWhich':'pro'}));
+	}
+}
+function logout()
+{
+	var logout=new XMLHttpRequest();
+	logout.addEventListener('load',function(req,res)
+	{
+		window.location.assign('/')
+	});
+	logout.open('GET','/logout');
+	logout.send();
+}
+</script>
+</html>
